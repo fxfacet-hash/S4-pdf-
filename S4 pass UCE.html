@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S4 Image Booklet Creator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 15px;
+        }
+        .container {
+            width: 100%;
+            max-width: 98%;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        .main-header {
+            text-align: center;
+            border-bottom: 2px dashed #333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Horizontal Menu Tabs Bar */
+        .tab-menu {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #cbd5e1;
+            padding-bottom: 10px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 12px 5px;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            text-align: center;
+        }
+        .tab-btn.active {
+            background-color: #20639b;
+            color: #ffffff;
+            border-color: #20639b;
+        }
+
+        /* Content Areas for Images */
+        .tab-content {
+            display: none;
+            padding: 15px 0;
+            text-align: center; /* Centers your images horizontally */
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Crucial Image Scaling Styling */
+        .page-image {
+            width: 100%;        /* Forces image to stretch horizontally across the field */
+            max-width: 800px;   /* Prevents it from getting too large on big screens */
+            height: auto;       /* Keeps original proportions so text stays crisp */
+            margin-bottom: 20px;/* Space between multiple image pages */
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Print setup for making the final PDF document */
+        @media print {
+            .tab-menu { display: none !important; }
+            .tab-content {
+                display: block !important;
+                page-break-before: always;
+            }
+            .page-image {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header class="main-header">
+            <h1>Senior Four (S4) Coursework</h1>
+            <p>Image Document Viewer</p>
+        </header>
+
+        <nav class="tab-menu">
+            <button class="tab-btn active" onclick="switchTab(event, 'notes')">Notes</button>
+            <button class="tab-btn" onclick="switchTab(event, 'questions')">Questions</button>
+            <button class="tab-btn" onclick="switchTab(event, 'qa')">Q&A</button>
+            <button class="tab-btn" onclick="switchTab(event, 'marking-guide')">Guide</button>
+        </nav>
+
+        <div id="notes" class="tab-content active">
+            <img src="" alt="Notes Page 1" class="page-image">
+            </div>
+
+        <div id="questions" class="tab-content">
+            <img src="Chemistry1.jpg" alt="Questions Page 1" class="page-image">
+        </div>
+
+      <div id="questions" class="tab-content">
+            <img src="Chemistry2.jpg" alt="Questions Page 2" class="page-image">
+      </div>
+
+        <div id="qa" class="tab-content">
+            <img src="qa1.jpg" alt="Q&A Page 1" class="page-image">
+        </div>
+
+        <div id="marking-guide" class="tab-content">
+            <img src="guide1.jpg" alt="Guide Page 1" class="page-image">
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(event, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
